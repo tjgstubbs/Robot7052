@@ -1,0 +1,33 @@
+package org.usfirst.frc.team7052.robot.commands;
+
+import org.usfirst.frc.team7052.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+public class TankDrive extends Command {
+
+	public TankDrive() {
+		requires(Robot.drivebase);
+	}
+
+	protected void initialize() {
+
+	}
+
+	protected void execute() {
+		//Prevents From throttle going 100%
+		double throttle = (1.0 - Robot.oi.LEFT_JOY.getThrottle()) / -2.0;
+		//Gives throttle to the motors at whatever value is given through the joysticks
+		Robot.drivebase.setRaw(Robot.oi.getLeftJoyY() * throttle, Robot.oi.getRightJoyY() * throttle);
+	}
+
+	protected boolean isFinished() {
+
+		return false;
+	}
+	
+	//If something goes wrong and the system is interrupted it will end
+	protected void interrupted() {
+		end();
+	}
+}
