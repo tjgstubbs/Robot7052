@@ -1,0 +1,36 @@
+package org.usfirst.frc.team7052.robot.subsystems;
+
+import org.usfirst.frc.team7052.robot.RobotMap;
+import org.usfirst.frc.team7052.robot.commands.TankDrive;
+
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
+public class DriveBase extends Subsystem {
+
+	private Spark leftMotor1;
+	private Spark leftMotor2;
+	private Spark rightMotor1;
+	private Spark rightMotor2;
+
+	public DriveBase() {
+		leftMotor1 = new Spark(RobotMap.LEFT_MOTOR1.value);
+		leftMotor2 = new Spark(RobotMap.LEFT_MOTOR2.value);
+		rightMotor1 = new Spark(RobotMap.RIGHT_MOTOR1.value);
+		rightMotor2 = new Spark(RobotMap.RIGHT_MOTOR2.value);
+	}
+
+	public void setRaw(double leftValue, double rightValue) {
+		leftMotor1.set(leftValue);
+		leftMotor2.set(leftValue);
+		rightMotor1.set(rightValue);
+		rightMotor2.set(rightValue);
+	}
+
+	@Override
+	//Runs the Tank Drive By Default
+	protected void initDefaultCommand() {
+		setDefaultCommand(new TankDrive());
+
+	}
+}
